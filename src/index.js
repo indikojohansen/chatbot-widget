@@ -57,7 +57,7 @@ import { getStyles } from './styles.js';
 
   const headerInfo = document.createElement('div');
   headerInfo.className = 'cw-header-info';
-  headerInfo.innerHTML = `<div class="cw-header-name">${escapeHtml(config.botName)}</div><div class="cw-header-status">Online</div>`;
+  headerInfo.innerHTML = `<div class="cw-header-name">${escapeHtml(config.botName)}</div><div class="cw-header-status"><div class="cw-online-dot"></div><span>Online</span></div>`;
 
   const closeBtn = document.createElement('button');
   closeBtn.className = 'cw-close';
