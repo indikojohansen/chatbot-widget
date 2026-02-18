@@ -57,7 +57,7 @@ import { getStyles } from './styles.js';
 
   const headerInfo = document.createElement('div');
   headerInfo.className = 'cw-header-info';
-  headerInfo.innerHTML = `<div class="cw-header-name">${escapeHtml(config.botName)}</div><div class="cw-header-status"><div class="cw-online-dot"></div><span>Online</span></div>`;
+  headerInfo.innerHTML = `<div class="cw-header-name">${escapeHtml(config.botName)}</div><div class="cw-header-status"><span>Online</span></div>`;
 
   const closeBtn = document.createElement('button');
   closeBtn.className = 'cw-close';
@@ -77,8 +77,8 @@ import { getStyles } from './styles.js';
   const input = document.createElement('input');
   input.className = 'cw-input';
   input.type = 'text';
-  input.placeholder = 'Type a message...';
-  input.setAttribute('aria-label', 'Type a message');
+  input.placeholder = 'Type your question...';
+  input.setAttribute('aria-label', 'Type your question');
 
   const sendBtn = document.createElement('button');
   sendBtn.className = 'cw-send';

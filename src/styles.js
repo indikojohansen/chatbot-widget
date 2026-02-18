@@ -26,8 +26,6 @@ export function getStyles() {
 
 #cw-root *, #cw-root *::before, #cw-root *::after {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
   font-family: inherit;
   line-height: inherit;
   -webkit-font-smoothing: inherit;
@@ -105,27 +103,28 @@ export function getStyles() {
 
 /* ── Header ── */
 .cw-header {
-  background: var(--cw-primary, #0f172a);
-  padding: 22px 20px;
+  background: #ffffff;
+  padding: 18px 20px;
   display: flex;
   align-items: center;
   gap: 14px;
   flex-shrink: 0;
+  border-bottom: 1px solid #e2e8f0;
 }
 
 .cw-avatar {
-  width: 44px;
-  height: 44px;
-  min-width: 44px;
-  min-height: 44px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.18);
+  width: 42px;
+  height: 42px;
+  min-width: 42px;
+  min-height: 42px;
+  border-radius: 12px;
+  background: #f1f5f9;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 700;
   font-size: 17px;
-  color: #ffffff;
+  color: var(--cw-primary, #0f172a);
   flex-shrink: 0;
   letter-spacing: -0.02em;
 }
@@ -133,7 +132,7 @@ export function getStyles() {
 .cw-avatar img {
   width: 100%;
   height: 100%;
-  border-radius: 50%;
+  border-radius: 12px;
   object-fit: cover;
 }
 
@@ -145,7 +144,7 @@ export function getStyles() {
 .cw-header-name {
   font-weight: 600;
   font-size: 16px;
-  color: #ffffff;
+  color: #1e293b;
   letter-spacing: -0.01em;
 }
 
@@ -153,13 +152,13 @@ export function getStyles() {
   display: flex;
   align-items: center;
   gap: 6px;
-  margin-top: 2px;
+  margin-top: 3px;
 }
 
 .cw-header-status span {
-  font-size: 12px;
-  font-weight: 500;
-  color: rgba(255,255,255,0.6);
+  font-size: 13px;
+  font-weight: 400;
+  color: #64748b;
 }
 
 .cw-online-dot {
@@ -172,9 +171,9 @@ export function getStyles() {
 }
 
 .cw-close {
-  background: rgba(255,255,255,0.1);
+  background: transparent;
   border: none;
-  color: rgba(255,255,255,0.6);
+  color: #94a3b8;
   cursor: pointer;
   width: 32px;
   height: 32px;
@@ -188,8 +187,8 @@ export function getStyles() {
 }
 
 .cw-close:hover {
-  background: rgba(255,255,255,0.2);
-  color: #ffffff;
+  background: #f1f5f9;
+  color: #1e293b;
 }
 
 .cw-close svg { width: 18px; height: 18px; fill: currentColor; }
@@ -199,7 +198,7 @@ export function getStyles() {
   flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
-  padding: 24px 20px;
+  padding: 24px;
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -313,7 +312,7 @@ export function getStyles() {
   min-width: 0;
   border: 1.5px solid #e2e8f0;
   border-radius: 24px;
-  padding: 12px 18px;
+  padding: 14px 20px;
   font-size: 14px;
   font-family: inherit;
   outline: none;
