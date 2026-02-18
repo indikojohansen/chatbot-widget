@@ -18,5 +18,8 @@ if (isWatch) {
   console.log('Watching for changes...');
 } else {
   await esbuild.build(buildOptions);
-  console.log('Built dist/widget.min.js');
+  // Also copy to demo/ for easy local testing
+  const fs = await import('fs');
+  fs.copyFileSync('dist/widget.min.js', 'demo/widget.min.js');
+  console.log('Built dist/widget.min.js (+ copied to demo/)');
 }
