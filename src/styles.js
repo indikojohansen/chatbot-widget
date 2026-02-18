@@ -1,38 +1,36 @@
 /**
  * All widget CSS as a string — injected as a <style> tag.
  * All classes prefixed with cw- to avoid conflicts.
- * Premium, modern design with proper spacing and visual hierarchy.
+ * Fully isolated from host page styles.
  */
 export function getStyles() {
   return `
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
+/* Root container — fully isolated from page */
 #cw-root {
-  --cw-primary: #0f172a;
-  --cw-primary-hover: #1e293b;
-  --cw-primary-light: rgba(15, 23, 42, 0.06);
-  --cw-accent: #3b82f6;
-  --cw-bg: #ffffff;
-  --cw-bg-chat: #f1f5f9;
-  --cw-text: #0f172a;
-  --cw-text-light: #64748b;
-  --cw-text-muted: #94a3b8;
-  --cw-border: #e2e8f0;
-  --cw-border-light: #f1f5f9;
-  --cw-radius: 20px;
-  --cw-shadow: 0 25px 50px -12px rgba(0,0,0,0.25), 0 0 0 1px rgba(0,0,0,0.03);
+  all: initial;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  z-index: 99990;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   font-size: 14px;
   line-height: 1.5;
-  box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  color: #0f172a;
 }
 
 #cw-root *, #cw-root *::before, #cw-root *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: inherit;
+  line-height: inherit;
+  -webkit-font-smoothing: inherit;
 }
 
 /* ── Launcher Button ── */
@@ -43,8 +41,8 @@ export function getStyles() {
   width: 64px;
   height: 64px;
   border-radius: 50%;
-  background: var(--cw-primary);
-  color: white;
+  background: var(--cw-primary, #0f172a);
+  color: #ffffff;
   border: none;
   cursor: pointer;
   display: flex;
@@ -52,11 +50,12 @@ export function getStyles() {
   justify-content: center;
   box-shadow: 0 8px 24px rgba(0,0,0,0.2), 0 2px 8px rgba(0,0,0,0.1);
   transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.2s ease, box-shadow 0.2s ease;
+  outline: none;
 }
 
 .cw-launcher:hover {
   transform: scale(1.1);
-  background: var(--cw-primary-hover);
+  background: var(--cw-primary-hover, #1e293b);
   box-shadow: 0 12px 32px rgba(0,0,0,0.25), 0 4px 12px rgba(0,0,0,0.12);
 }
 
@@ -83,9 +82,9 @@ export function getStyles() {
   max-width: calc(100vw - 32px);
   height: 600px;
   max-height: calc(100vh - 130px);
-  background: var(--cw-bg);
-  border-radius: var(--cw-radius);
-  box-shadow: var(--cw-shadow);
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25), 0 0 0 1px rgba(0,0,0,0.03);
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -106,47 +105,35 @@ export function getStyles() {
 
 /* ── Header ── */
 .cw-header {
-  background: var(--cw-primary);
-  color: white;
-  padding: 24px 24px 20px;
+  background: var(--cw-primary, #0f172a);
+  padding: 22px 20px;
   display: flex;
   align-items: center;
   gap: 14px;
   flex-shrink: 0;
-  position: relative;
-}
-
-.cw-header::after {
-  content: '';
-  position: absolute;
-  bottom: -12px;
-  left: 0;
-  right: 0;
-  height: 12px;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.04), transparent);
-  pointer-events: none;
-  z-index: 1;
 }
 
 .cw-avatar {
   width: 44px;
   height: 44px;
-  border-radius: 14px;
-  background: rgba(255,255,255,0.2);
-  backdrop-filter: blur(8px);
+  min-width: 44px;
+  min-height: 44px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.18);
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 700;
-  font-size: 16px;
-  color: white;
+  font-size: 17px;
+  color: #ffffff;
   flex-shrink: 0;
+  letter-spacing: -0.02em;
 }
 
 .cw-avatar img {
   width: 100%;
   height: 100%;
-  border-radius: 14px;
+  border-radius: 50%;
   object-fit: cover;
 }
 
@@ -156,9 +143,9 @@ export function getStyles() {
 }
 
 .cw-header-name {
-  font-weight: 700;
+  font-weight: 600;
   font-size: 16px;
-  color: white;
+  color: #ffffff;
   letter-spacing: -0.01em;
 }
 
@@ -166,13 +153,13 @@ export function getStyles() {
   display: flex;
   align-items: center;
   gap: 6px;
-  margin-top: 3px;
+  margin-top: 2px;
 }
 
 .cw-header-status span {
   font-size: 12px;
   font-weight: 500;
-  color: rgba(255,255,255,0.7);
+  color: rgba(255,255,255,0.6);
 }
 
 .cw-online-dot {
@@ -182,30 +169,27 @@ export function getStyles() {
   border-radius: 50%;
   flex-shrink: 0;
   box-shadow: 0 0 0 2px rgba(52, 211, 153, 0.3);
-  animation: cw-pulse-dot 2s ease-in-out infinite;
-}
-
-@keyframes cw-pulse-dot {
-  0%, 100% { box-shadow: 0 0 0 2px rgba(52, 211, 153, 0.3); }
-  50% { box-shadow: 0 0 0 5px rgba(52, 211, 153, 0.1); }
 }
 
 .cw-close {
   background: rgba(255,255,255,0.1);
   border: none;
-  color: rgba(255,255,255,0.7);
+  color: rgba(255,255,255,0.6);
   cursor: pointer;
-  padding: 8px;
-  border-radius: 10px;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
   transition: background 0.15s, color 0.15s;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
+  outline: none;
 }
 
 .cw-close:hover {
   background: rgba(255,255,255,0.2);
-  color: white;
+  color: #ffffff;
 }
 
 .cw-close svg { width: 18px; height: 18px; fill: currentColor; }
@@ -214,11 +198,12 @@ export function getStyles() {
 .cw-messages {
   flex: 1;
   overflow-y: auto;
+  overflow-x: hidden;
   padding: 24px 20px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  background: var(--cw-bg-chat);
+  gap: 12px;
+  background: #f8fafc;
 }
 
 .cw-messages::-webkit-scrollbar {
@@ -230,17 +215,18 @@ export function getStyles() {
 }
 
 .cw-messages::-webkit-scrollbar-thumb {
-  background: var(--cw-border);
+  background: #cbd5e1;
   border-radius: 10px;
 }
 
 .cw-msg {
-  max-width: 80%;
-  padding: 14px 18px;
+  max-width: 85%;
+  padding: 12px 16px;
   word-wrap: break-word;
+  overflow-wrap: break-word;
   white-space: pre-wrap;
   font-size: 14px;
-  line-height: 1.6;
+  line-height: 1.55;
   animation: cw-msg-in 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -251,17 +237,17 @@ export function getStyles() {
 
 .cw-msg--bot {
   align-self: flex-start;
-  background: var(--cw-bg);
-  color: var(--cw-text);
-  border-radius: 4px 20px 20px 20px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.04), 0 0 0 1px rgba(0,0,0,0.02);
+  background: #ffffff;
+  color: #1e293b;
+  border-radius: 4px 18px 18px 18px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
 }
 
 .cw-msg--user {
   align-self: flex-end;
-  background: var(--cw-primary);
-  color: white;
-  border-radius: 20px 20px 4px 20px;
+  background: var(--cw-primary, #0f172a);
+  color: #ffffff;
+  border-radius: 18px 18px 4px 18px;
 }
 
 .cw-msg--error {
@@ -280,19 +266,18 @@ export function getStyles() {
   color: #991b1b;
   font-weight: 600;
   text-decoration: underline;
-  text-underline-offset: 2px;
 }
 
 /* ── Typing Indicator ── */
 .cw-typing {
   align-self: flex-start;
-  padding: 16px 20px;
-  background: var(--cw-bg);
-  border-radius: 4px 20px 20px 20px;
+  padding: 14px 18px;
+  background: #ffffff;
+  border-radius: 4px 18px 18px 18px;
   display: flex;
   gap: 5px;
   align-items: center;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.04), 0 0 0 1px rgba(0,0,0,0.02);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
   animation: cw-msg-in 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -300,7 +285,7 @@ export function getStyles() {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: var(--cw-text-muted);
+  background: #94a3b8;
   animation: cw-bounce 1.2s infinite;
 }
 
@@ -314,45 +299,49 @@ export function getStyles() {
 
 /* ── Input Area ── */
 .cw-input-area {
-  padding: 20px;
+  padding: 16px 20px;
   display: flex;
   gap: 12px;
   align-items: center;
   flex-shrink: 0;
-  background: var(--cw-bg);
-  border-top: 1px solid var(--cw-border-light);
+  background: #ffffff;
+  border-top: 1px solid #f1f5f9;
 }
 
 .cw-input {
   flex: 1;
-  border: 1.5px solid var(--cw-border);
-  border-radius: 28px;
-  padding: 12px 20px;
+  min-width: 0;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 24px;
+  padding: 12px 18px;
   font-size: 14px;
   font-family: inherit;
   outline: none;
   transition: border-color 0.2s, box-shadow 0.2s;
   resize: none;
-  color: var(--cw-text);
-  background: var(--cw-bg-chat);
+  color: #1e293b;
+  background: #f8fafc;
+  line-height: 1.4;
 }
 
 .cw-input::placeholder {
-  color: var(--cw-text-muted);
+  color: #94a3b8;
 }
 
 .cw-input:focus {
-  border-color: var(--cw-accent);
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-  background: var(--cw-bg);
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.12);
+  background: #ffffff;
 }
 
 .cw-send {
-  width: 44px;
-  height: 44px;
+  width: 42px;
+  height: 42px;
+  min-width: 42px;
+  min-height: 42px;
   border-radius: 50%;
-  background: var(--cw-primary);
-  color: white;
+  background: var(--cw-primary, #0f172a);
+  color: #ffffff;
   border: none;
   cursor: pointer;
   display: flex;
@@ -360,10 +349,11 @@ export function getStyles() {
   justify-content: center;
   flex-shrink: 0;
   transition: background 0.15s, opacity 0.15s, transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  outline: none;
 }
 
 .cw-send:hover {
-  background: var(--cw-primary-hover);
+  background: var(--cw-primary-hover, #1e293b);
   transform: scale(1.08);
 }
 
@@ -380,10 +370,9 @@ export function getStyles() {
   padding: 10px;
   font-size: 11px;
   font-weight: 500;
-  color: var(--cw-text-muted);
-  background: var(--cw-bg);
+  color: #94a3b8;
+  background: #ffffff;
   flex-shrink: 0;
-  letter-spacing: 0.01em;
 }
 
 /* ── Mobile ── */
@@ -399,18 +388,13 @@ export function getStyles() {
     max-height: calc(100vh - 80px);
   }
 
-  .cw-header {
-    padding: 20px 20px 18px;
-    border-radius: 20px 20px 0 0;
-  }
-
   .cw-messages {
     padding: 20px 16px;
   }
 
   .cw-input-area {
-    padding: 16px;
-    padding-bottom: max(16px, env(safe-area-inset-bottom));
+    padding: 14px 16px;
+    padding-bottom: max(14px, env(safe-area-inset-bottom));
   }
 }
 `;
