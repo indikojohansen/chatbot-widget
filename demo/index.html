@@ -68,13 +68,14 @@
 
   <!-- Widget embed — update data-api-url to your backend -->
   <script
-    src="../dist/widget.min.js"
-    data-api-url="http://localhost:8888/.netlify/functions/chat"
+    src="https://cdn.jsdelivr.net/gh/indikojohansen/chatbot-widget@main/dist/widget.min.js"
+    data-api-url="https://chatbot-backend.{name}.workers.dev/c/{practice}"
     data-primary-color="#0f172a"
-    data-greeting="Hi! 👋 I'm a demo chatbot. Connect me to a backend to start chatting!"
+    data-greeting="Hi! 👋 I'm a demo chatbot. Why don't you try it for yourself?"
     data-bot-name="Aria"
     data-fallback-phone="(555) 123-4567"
     data-fallback-email="hello@example.com"
+    data-bot-avatar="https://static.vecteezy.com/system/resources/previews/036/470/606/non_2x/cute-tooth-girl-character-in-cartoon-style-dental-personage-illustration-illustration-for-children-dentistry-happy-tooth-icon-vector.jpg"
   ></script>
 </body>
 </html>
