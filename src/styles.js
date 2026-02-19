@@ -69,6 +69,7 @@ export function getStyles() {
   height: 28px;
   fill: currentColor;
   transition: transform 0.3s ease;
+  pointer-events: none;
 }
 
 /* ── Chat Window ── */
