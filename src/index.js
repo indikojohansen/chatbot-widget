@@ -38,7 +38,6 @@ import { getStyles } from './styles.js';
   launcher.className = `cw-launcher cw-launcher--${config.position}`;
   if (config.startHidden) {
     launcher.classList.add('cw-launcher--hidden');
-    launcher.style.display = 'none';
   }
   launcher.innerHTML = chatIcon;
   launcher.setAttribute('aria-label', 'Open chat');
