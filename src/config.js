@@ -21,5 +21,6 @@ export function getConfig() {
     historyMode: script.getAttribute('data-history') || 'session',
     maxHistory: parseInt(script.getAttribute('data-max-history') || '10', 10),
     position: script.getAttribute('data-position') || 'right',
+    closeOnOutsideClick: script.getAttribute('data-close-outside') === 'true',
   });
 }

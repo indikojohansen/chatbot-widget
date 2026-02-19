@@ -124,6 +124,15 @@ import { getStyles } from './styles.js';
 
   sendBtn.addEventListener('click', handleSend);
 
+  // Close chat when clicking outside the window
+  if (config.closeOnOutsideClick) {
+    document.addEventListener('click', (e) => {
+      if (isOpen && !win.contains(e.target) && !launcher.contains(e.target)) {
+        toggleWindow();
+      }
+    });
+  }
+
   // --- Functions ---
   function toggleWindow() {
     isOpen = !isOpen;
