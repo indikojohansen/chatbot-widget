@@ -63,6 +63,7 @@ export function getStyles() {
 
 .cw-launcher--right { right: 24px; }
 .cw-launcher--left { left: 24px; }
+.cw-launcher--hidden { display: none !important; }
 
 .cw-launcher svg {
   width: 28px;

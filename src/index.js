@@ -36,12 +36,11 @@ import { getStyles } from './styles.js';
   // --- Launcher button ---
   const launcher = document.createElement('button');
   launcher.className = `cw-launcher cw-launcher--${config.position}`;
+  if (config.startHidden) {
+    launcher.classList.add('cw-launcher--hidden');
+  }
   launcher.innerHTML = chatIcon;
   launcher.setAttribute('aria-label', 'Open chat');
-
-  if (config.startHidden) {
-    launcher.style.display = 'none';
-  }
 
   // --- Chat window ---
   const win = document.createElement('div');
