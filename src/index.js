@@ -12,13 +12,29 @@ import { getStyles } from './styles.js';
   const config = getConfig();
   if (!config) return;
 
+  const CRITICAL_STYLE_ID = 'cw-critical-style';
+  const WIDGET_STYLE_ID = 'cw-style';
+  const styleHost = document.head || document.documentElement;
+
   const history = createHistory(config);
   let isOpen = false;
   let isLoading = false;
 
-  // --- Inject styles ---
-  const style = document.createElement('style');
-  style.textContent = getStyles();
+  // --- Inject critical styles first to avoid first-paint flash ---
+  if (!document.getElementById(CRITICAL_STYLE_ID)) {
+    const criticalStyle = document.createElement('style');
+    criticalStyle.id = CRITICAL_STYLE_ID;
+    criticalStyle.textContent = '.cw-launcher--hidden{display:none !important;}';
+    styleHost.appendChild(criticalStyle);
+  }
+
+  // --- Inject full widget styles ---
+  if (!document.getElementById(WIDGET_STYLE_ID)) {
+    const style = document.createElement('style');
+    style.id = WIDGET_STYLE_ID;
+    style.textContent = getStyles();
+    styleHost.appendChild(style);
+  }
 
   // --- Root container ---
   const root = document.createElement('div');
@@ -94,7 +110,7 @@ import { getStyles } from './styles.js';
   win.append(header, messagesEl, inputArea);
 
   // Assemble root
-  root.append(style, launcher, win);
+  root.append(launcher, win);
 
   // --- Mount ---
   document.body.appendChild(root);
