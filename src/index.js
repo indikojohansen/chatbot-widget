@@ -93,9 +93,9 @@ import { getStyles } from './styles.js';
   const inputArea = document.createElement('div');
   inputArea.className = 'cw-input-area';
 
-  const input = document.createElement('input');
+  const input = document.createElement('textarea');
   input.className = 'cw-input';
-  input.type = 'text';
+  input.rows = 1;
   input.placeholder = 'Type your question...';
   input.setAttribute('aria-label', 'Type your question');
 
@@ -140,6 +140,11 @@ import { getStyles } from './styles.js';
   });
 
   sendBtn.addEventListener('click', handleSend);
+
+  input.addEventListener('input', () => {
+    input.style.height = 'auto';
+    input.style.height = Math.min(input.scrollHeight, 120) + 'px';
+  });
 
   // Close chat when clicking outside the window
   if (config.closeOnOutsideClick) {
@@ -218,6 +223,7 @@ import { getStyles } from './styles.js';
     if (!text || isLoading) return;
 
     input.value = '';
+    input.style.height = 'auto';
     addMessage(text, 'user');
     history.addUser(text);
 

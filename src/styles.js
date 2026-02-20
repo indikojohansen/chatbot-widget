@@ -303,7 +303,7 @@ export function getStyles() {
   padding: 16px 20px;
   display: flex;
   gap: 12px;
-  align-items: center;
+  align-items: flex-end;
   flex-shrink: 0;
   background: #ffffff;
   border-top: 1px solid #f1f5f9;
