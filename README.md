@@ -2,8 +2,6 @@
 
 Embeddable chatbot UI — vanilla JavaScript, zero dependencies, single `<script>` tag.
 
-Works with the [chatbot-backend](https://github.com/indikojohansen/chatbot-backend) (Cloudflare Worker or Netlify Function).
-
 ## Quick Start
 
 Add one script tag to any website:
@@ -20,7 +18,6 @@ Add one script tag to any website:
 ></script>
 ```
 
-That's it. No npm install, no build step, no framework required.
 
 ## Configuration
 
@@ -40,17 +37,6 @@ All options are set via `data-*` attributes on the script tag:
 | `data-max-history` | `10` | Max messages sent with each request |
 | `data-position` | `right` | `right` or `left` launcher position |
 
-## Features
-
-- 💬 Floating chat button with open/close animation
-- 🎨 Customizable brand color, bot name, and avatar
-- 📱 Fully responsive (mobile-friendly)
-- ⚡ Zero dependencies, ~8KB minified
-- 🔒 No secrets in client code — widget sends to your backend
-- 💾 Optional conversation persistence (localStorage)
-- ⚠️ Fallback UI with phone/email when API is unreachable
-- ♿ Accessible (ARIA labels, keyboard navigation)
-
 ## Development
 
 ```bash
@@ -65,25 +51,3 @@ npm run dev
 ```
 
 Open `demo/index.html` in a browser to test. Update `data-api-url` to point to a running backend.
-
-## How It Works
-
-1. Script finds its own `<script>` tag via `document.currentScript`
-2. Reads all `data-*` config attributes
-3. Injects scoped CSS (`cw-` prefixed classes)
-4. Mounts a floating chat button and window to `<body>`
-5. On send: POSTs conversation history to your backend
-6. Displays the response (or fallback error message)
-
-No iframes, no shadow DOM, no global namespace pollution.
-
-## Backend Setup
-
-See [chatbot-backend](https://github.com/indikojohansen/chatbot-backend) for deployment options:
-
-- **Self-hosted (Netlify Function):** You own the API key and deploy
-- **Managed (Cloudflare Worker):** Multi-tenant, we handle infrastructure
-
-## License
-
-MIT
