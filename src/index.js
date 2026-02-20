@@ -115,19 +115,17 @@ import { getStyles } from './styles.js';
   // --- Mount ---
   document.body.appendChild(root);
 
-  // --- Add greeting ---
-  if (config.greeting) {
-    addMessage(config.greeting, 'bot');
-  }
-
-  // --- Restore history ---
+  // --- Restore history OR seed greeting ---
   const restored = history.getMessages();
   if (restored.length > 0) {
-    // Clear greeting if we have history
-    messagesEl.innerHTML = '';
+    // Restore previous conversation (greeting already in history)
     restored.forEach(msg => {
       addMessage(msg.content, msg.role === 'user' ? 'user' : 'bot');
     });
+  } else if (config.greeting) {
+    // Fresh session — display greeting and seed into history
+    addMessage(config.greeting, 'bot');
+    history.addAssistant(config.greeting);
   }
 
   // --- Event listeners ---
