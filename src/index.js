@@ -166,12 +166,59 @@ import { getStyles } from './styles.js';
     }
   }
 
+  function renderMarkdown(text) {
+    // Escape HTML first to prevent XSS
+    const escaped = escapeHtml(text);
+    const lines = escaped.split('\n');
+    const out = [];
+    let inOl = false;
+    let inUl = false;
+
+    for (let i = 0; i < lines.length; i++) {
+      let line = lines[i];
+
+      // Ordered list: "1. item"
+      const olMatch = line.match(/^(\d+)\.\s+(.+)/);
+      if (olMatch) {
+        if (!inOl) { if (inUl) { out.push('</ul>'); inUl = false; } out.push('<ol>'); inOl = true; }
+        out.push(`<li>${inline(olMatch[2])}</li>`);
+        continue;
+      } else if (inOl) { out.push('</ol>'); inOl = false; }
+
+      // Unordered list: "- item" or "• item"
+      const ulMatch = line.match(/^[-•]\s+(.+)/);
+      if (ulMatch) {
+        if (!inUl) { if (inOl) { out.push('</ol>'); inOl = false; } out.push('<ul>'); inUl = true; }
+        out.push(`<li>${inline(ulMatch[1])}</li>`);
+        continue;
+      } else if (inUl) { out.push('</ul>'); inUl = false; }
+
+      // Empty line → paragraph break
+      if (line.trim() === '') { out.push('<br>'); continue; }
+
+      // Regular line with inline formatting
+      out.push(`<p>${inline(line)}</p>`);
+    }
+
+    if (inOl) out.push('</ol>');
+    if (inUl) out.push('</ul>');
+    return out.join('');
+
+    function inline(s) {
+      return s
+        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\*(.+?)\*/g, '<em>$1</em>');
+    }
+  }
+
   function addMessage(text, type) {
     const msg = document.createElement('div');
     msg.className = `cw-msg cw-msg--${type}`;
 
     if (type === 'error') {
-      msg.innerHTML = text; // error messages may contain HTML links
+      msg.innerHTML = text;
+    } else if (type === 'bot') {
+      msg.innerHTML = renderMarkdown(text);
     } else {
       msg.textContent = text;
     }

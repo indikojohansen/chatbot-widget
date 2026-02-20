@@ -225,7 +225,6 @@ export function getStyles() {
   padding: 12px 16px;
   word-wrap: break-word;
   overflow-wrap: break-word;
-  white-space: pre-wrap;
   font-size: 14px;
   line-height: 1.55;
   animation: cw-msg-in 0.3s cubic-bezier(0.16, 1, 0.3, 1);
@@ -244,11 +243,19 @@ export function getStyles() {
   box-shadow: 0 1px 3px rgba(0,0,0,0.06);
 }
 
+.cw-msg--bot p { margin: 0; }
+.cw-msg--bot br { display: block; content: ''; margin: 4px 0; }
+.cw-msg--bot ol, .cw-msg--bot ul { margin: 6px 0; padding-left: 20px; }
+.cw-msg--bot li { margin: 2px 0; }
+.cw-msg--bot strong { font-weight: 600; }
+.cw-msg--bot em { font-style: italic; }
+
 .cw-msg--user {
   align-self: flex-end;
   background: var(--cw-primary, #0f172a);
   color: #ffffff;
   border-radius: 18px 18px 4px 18px;
+  white-space: pre-wrap;
 }
 
 .cw-msg--error {
